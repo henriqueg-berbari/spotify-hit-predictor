@@ -1,1 +1,4 @@
-# spotify-hit-predictor
+## 🚀 How to Run
+1. Clone this repo.
+2. Install dependencies: `pip install -r requirements.txt`
+3. Run the app: `streamlit run app.py`# spotify-hit-predictor
