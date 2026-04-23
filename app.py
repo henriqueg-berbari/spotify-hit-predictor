@@ -10,11 +10,19 @@ st.set_page_config(page_title="Spotify Analysis", layout="wide")
 
 @st.cache_data
 def load_data():
-    data = pd.read_csv("data/spotify_data.csv")
-    if 'Unnamed: 0' in data.columns:
-        data = data.drop(columns=['Unnamed: 0'])
+    # 1. Define only the columns you actually use in your app
+    # This is the BIGGEST memory saver
+    cols = ['popularity', 'year', 'genre', 'danceability', 'energy', 
+            'loudness', 'speechiness', 'acousticness', 'tempo', 'duration_ms']
+    
+    # 2. Read only those columns
+    data = pd.read_csv("spotify_data.zip", usecols=cols)
+    
+    # 3. Downcast numbers to take up less space
+    data['year'] = data['year'].astype('int16')
+    data['popularity'] = data['popularity'].astype('int8')
+    
     return data
-
 df = load_data()
 
 
