@@ -10,7 +10,7 @@ st.set_page_config(page_title="Spotify Analysis", layout="wide")
 
 @st.cache_data
 def load_data():
-    data = pd.read_csv("data/spotify_data.csv")
+    data = pd.read_csv("spotify_data.zip")
     if 'Unnamed: 0' in data.columns:
         data = data.drop(columns=['Unnamed: 0'])
     return data
