@@ -7,24 +7,30 @@ import seaborn as sns
 
 st.set_page_config(page_title="Spotify Analysis", layout="wide")
 
+import os
+
 @st.cache_data
 def load_data():
-    cols = ['popularity', 'year', 'artist_name','genre', 'danceability', 'energy', 
+    # This finds the EXACT folder where your app.py is running on the server
+    current_dir = os.path.dirname(os.path.abspath(__file__))
+    file_path = os.path.join(current_dir, "spotify_data.zip")
+    
+    cols = ['popularity', 'year', 'genre', 'danceability', 'energy', 
             'loudness', 'speechiness', 'acousticness', 'tempo', 'duration_ms']
     
-    # 1. Load the data
-    data = pd.read_csv("spotify_data.zip", usecols=cols)
+    # Check if the file actually exists before trying to read it
+    if not os.path.exists(file_path):
+        st.error(f"File not found at: {file_path}")
+        st.write("Files actually present:", os.listdir(current_dir))
+        return None
+
+    data = pd.read_csv(file_path, usecols=cols)
     
-    # 2. Clean up unwanted columns
-    if 'Unnamed: 0' in data.columns:
-        data = data.drop(columns=['Unnamed: 0'])
-    
-    # 3. Downcast numbers to take up less space
+    # Downcasting to save memory
     data['year'] = data['year'].astype('int16')
     data['popularity'] = data['popularity'].astype('int8')
     
     return data
-
 # Call the function exactly once
 df = load_data()
 
