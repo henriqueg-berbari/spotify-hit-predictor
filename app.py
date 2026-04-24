@@ -9,22 +9,23 @@ st.set_page_config(page_title="Spotify Analysis", layout="wide")
 
 
 
+import os
+
 @st.cache_data
 def load_data():
     cols = ['popularity', 'year', 'genre', 'danceability', 'energy', 
             'loudness', 'speechiness', 'acousticness', 'tempo', 'duration_ms']
     
-    # Try the most likely path first
-    try:
-        data = pd.read_csv("spotify_data.zip", usecols=cols)
-    except FileNotFoundError:
-        # If that fails, try the root folder
-        data = pd.read_csv("spotify_data.zip", usecols=cols)
+    # This finds the directory where app.py lives and joins it with the filename
+    base_path = os.path.dirname(__file__)
+    file_path = os.path.join(base_path, "spotify_data.zip")
+    
+    data = pd.read_csv(file_path, usecols=cols)
     
     if 'Unnamed: 0' in data.columns:
         data = data.drop(columns=['Unnamed: 0'])
     return data
-
+    
 df = load_data()    
     # 2. Read only those columns
     data = pd.read_csv("spotify_data.zip", usecols=cols)
