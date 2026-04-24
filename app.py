@@ -7,37 +7,28 @@ import seaborn as sns
 
 st.set_page_config(page_title="Spotify Analysis", layout="wide")
 
-
-
-import os
-
 @st.cache_data
 def load_data():
-    cols = ['popularity', 'year', 'genre', 'danceability', 'energy', 
+    cols = ['popularity', 'year', 'artist_name','genre', 'danceability', 'energy', 
             'loudness', 'speechiness', 'acousticness', 'tempo', 'duration_ms']
     
-    # This finds the directory where app.py lives and joins it with the filename
-    base_path = os.path.dirname(__file__)
-    file_path = os.path.join(base_path, "spotify_data.zip")
+    # 1. Load the data
+    data = pd.read_csv("spotify_data.zip", usecols=cols)
     
-    data = pd.read_csv(file_path, usecols=cols)
-    
+    # 2. Clean up unwanted columns
     if 'Unnamed: 0' in data.columns:
         data = data.drop(columns=['Unnamed: 0'])
-    return data
-    
-df = load_data()    
-    # 2. Read only those columns
-    data = pd.read_csv("spotify_data.zip", usecols=cols)
     
     # 3. Downcast numbers to take up less space
     data['year'] = data['year'].astype('int16')
     data['popularity'] = data['popularity'].astype('int8')
     
     return data
+
+# Call the function exactly once
 df = load_data()
 
-
+# Start the Sidebar
 st.sidebar.header("Filter Options")
 year_list = ["All"] + sorted(df['year'].unique().tolist())
 selected_year = st.sidebar.selectbox("Select Year", year_list)
