@@ -13,14 +13,18 @@ import os
 def load_data():
     # 1. This is the direct download link for your Google Drive file
     # Replace 'YOUR_FILE_ID' with the ID from your share link
-    file_id = 'YOUR_FILE_ID_HERE' 
-    url = f'https://drive.google.com/file/d/1E6nG9xZJ2_R2IOs8b2ip2YOaLJGuGQmS/view?usp=drive_link={file_id}'
+    file_id = '1E6nG9xZJ2_R2IOs8b2ip2YOaL JGuGQmS'
+    url = f'https://drive.google.com/uc?export=download&id={file_id}'
     
     cols = ['popularity', 'year', 'genre', 'danceability', 'energy', 
             'loudness', 'speechiness', 'acousticness', 'tempo', 'duration_ms']
     
-    # 2. Tell Pandas to read directly from the URL
-    data = pd.read_csv(url, usecols=cols)
+# Load the data WITHOUT restricting columns first
+    data = pd.read_csv(url)
+    
+    # Then only keep the columns that actually exist to prevent crashing
+    existing_cols = [c for c in cols if c in data.columns]
+    data = data[existing_cols]
     
     # 3. Clean and optimize
     if 'Unnamed: 0' in data.columns:
