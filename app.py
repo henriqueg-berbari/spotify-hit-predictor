@@ -8,13 +8,24 @@ import seaborn as sns
 st.set_page_config(page_title="Spotify Analysis", layout="wide")
 
 
+
 @st.cache_data
 def load_data():
-    # 1. Define only the columns you actually use in your app
-    # This is the BIGGEST memory saver
     cols = ['popularity', 'year', 'genre', 'danceability', 'energy', 
             'loudness', 'speechiness', 'acousticness', 'tempo', 'duration_ms']
     
+    # Try the most likely path first
+    try:
+        data = pd.read_csv("spotify_data.zip", usecols=cols)
+    except FileNotFoundError:
+        # If that fails, try the root folder
+        data = pd.read_csv("spotify_data.zip", usecols=cols)
+    
+    if 'Unnamed: 0' in data.columns:
+        data = data.drop(columns=['Unnamed: 0'])
+    return data
+
+df = load_data()    
     # 2. Read only those columns
     data = pd.read_csv("spotify_data.zip", usecols=cols)
     
