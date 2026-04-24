@@ -11,26 +11,26 @@ import os
 
 @st.cache_data
 def load_data():
-    # This finds the EXACT folder where your app.py is running on the server
-    current_dir = os.path.dirname(os.path.abspath(__file__))
-    file_path = os.path.join(current_dir, "spotify_data.zip")
+    # 1. This is the direct download link for your Google Drive file
+    # Replace 'YOUR_FILE_ID' with the ID from your share link
+    file_id = 'YOUR_FILE_ID_HERE' 
+    url = f'https://drive.google.com/file/d/1E6nG9xZJ2_R2IOs8b2ip2YOaLJGuGQmS/view?usp=drive_link={file_id}'
     
     cols = ['popularity', 'year', 'genre', 'danceability', 'energy', 
             'loudness', 'speechiness', 'acousticness', 'tempo', 'duration_ms']
     
-    # Check if the file actually exists before trying to read it
-    if not os.path.exists(file_path):
-        st.error(f"File not found at: {file_path}")
-        st.write("Files actually present:", os.listdir(current_dir))
-        return None
-
-    data = pd.read_csv(file_path, usecols=cols)
+    # 2. Tell Pandas to read directly from the URL
+    data = pd.read_csv(url, usecols=cols)
     
-    # Downcasting to save memory
+    # 3. Clean and optimize
+    if 'Unnamed: 0' in data.columns:
+        data = data.drop(columns=['Unnamed: 0'])
+    
     data['year'] = data['year'].astype('int16')
     data['popularity'] = data['popularity'].astype('int8')
     
     return data
+
 # Call the function exactly once
 df = load_data()
 
