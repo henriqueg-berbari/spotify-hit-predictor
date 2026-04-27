@@ -28,7 +28,7 @@ The Human Factor: While data provides a stable "floor," my study proves that 33%
 🚀 Experience the Live App
 I built a fully interactive Streamlit Dashboard to make these findings come to life.
 
-👉 Open the Spotify Hit Predictor
+👉 Open the Spotify Hit Predictor (https://spotify-hit-predictor-g7krvylpaaqzh3dnlyuqsp.streamlit.app/)
 In the app, you can:
 
 Filter through 20+ years of music history by genre and artist.
