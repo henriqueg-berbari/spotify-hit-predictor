@@ -350,9 +350,9 @@ with tab_conclusions:
     st.title("🎯 Final Verdict & Strategic Roadmap")
     
     # --- 1. THE PERFORMANCE BREAKDOWN (The "So What?") ---
-    st.subheader("📊 Model Results: The 'So What?'")
+    st.subheader("📊 Model Results:'So What?'")
     performance_data = {
-        "Role": ["🛡️ The Expert Critic", "🎯 The Selective Scout", "🧠 The Human Factor"],
+        "Role": ["🛡️ Expert Critic", "🎯 Selective Scout", "🧠 Human Factor"],
         "Metric": ["Flop Recall", "Hit Precision", "Hit Recall"],
         "Result": ["78%", "68%", "54%"],
         "The 'So What?'": [
@@ -369,7 +369,7 @@ with tab_conclusions:
     st.divider()
 
     # --- 2. THE 2026 HIT BLUEPRINT (The "Actionable Spec") ---
-    st.header("🔮 The 2026 Hit Blueprint")
+    st.header("🔮 2026 Hit Blueprint")
     st.write("""
         Based on our Random Forest optimization, a track designed to maximize 
         statistical probability in the current market would follow this profile:
