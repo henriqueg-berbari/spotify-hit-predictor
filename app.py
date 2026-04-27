@@ -420,9 +420,18 @@ with tab_conclusions:
     # --- 4. FINAL SUMMARY ---
     st.divider()
     st.success("""
-    **Project Conclusion:** This analysis demonstrates that while data provides a stable 'floor' for success by identifying market trends, the 'ceiling' is ultimately determined by human connection and cultural timing. This model serves as a powerful Risk Mitigation tool for industry professionals—offering a map of the landscape, but not the destination. 
-    This model acts as a powerful **Risk Mitigation** tool for any music-focused team, **but shouldnt be a single source of truth, since music is art, and arts shouldnt be quantifiable**.
-    Ultimately, while we can quantify the patterns of the past, the "magic" of a hit remains a human element that data can observe, but never truly replicate. **Music is an art first; the data is simply its echo**.
-    """)
-    
+### **Project Conclusion: The Harmony of Data & Art**
+
+This analysis demonstrates that while data provides a stable **'floor'** for success by identifying market trends, 
+the **'ceiling'** is ultimately determined by human connection and cultural timing. 
+
+This model serves as a powerful **Risk Mitigation** tool for any music-focused team—offering a map of 
+the landscape, but not the destination. It provides the statistical probability, but it is not 
+a single source of truth.
+
+Ultimately, while we can quantify the patterns of the past, the **'magic'** of a hit remains a 
+human element that data can observe, but never truly replicate. 
+
+**Music is an art first; the data is simply its echo.**
+""")
     st.balloons()
