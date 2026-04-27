@@ -246,7 +246,7 @@ with tab_model:
         Check out [this article](https://www.ibm.com/topics/random-forest) 
         which explains how Random Forest balances complexity and accuracy.
         """)
-        st.markdown("""And check [this link](https://github.com/henriqueg-berbari) for the GitHub repository for the walk through of the full methodology""")
+        st.markdown("""And check [this link](https://github.com/henriqueg-berbari/spotify-hit-predictor/blob/main/eda.ipynb) for the GitHub repository for the walk through of the full methodology""")
 
     st.divider()
 
