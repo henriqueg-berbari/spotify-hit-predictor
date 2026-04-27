@@ -13,30 +13,28 @@ import os
 @st.cache_data
 def load_data():
     file_id = '1E6nG9xZJ2_R2IOs8b2ip2YOaLJGuGQmS'
-    # This tool handles the "Too Large" warning for you!
     url = f'https://drive.google.com/uc?id={file_id}'
     output = 'spotify_data.csv'
     
+    # Download the file
     gdown.download(url, output, quiet=False)
     
-    
+    # Read the data
     data = pd.read_csv(output)
-    data = data.sample(300000, random_state=42) 
-   
-data['year'] = data['year'].astype('int16')
-data['popularity'] = data['popularity'].astype('int8')
-
-float_cols = data.select_dtypes(include=['float64']).columns
-data[float_cols] = data[float_cols].astype('float32')
-
-# ... previous lines ...
+    data = data.sample(250000, random_state=42)
+    # Optimization: Reduces memory footprint to prevent crashing
+    data['year'] = data['year'].astype('int16')
+    data['popularity'] = data['popularity'].astype('int8')
+    
+    # Convert large decimals to smaller floats
+    float_cols = data.select_dtypes(include=['float64']).columns
     data[float_cols] = data[float_cols].astype('float32')
-
+    
+    # Clean index columns
     if 'Unnamed: 0' in data.columns:
         data = data.drop(columns=['Unnamed: 0'])
-    
-    return data # <--- This line must be indented 4 spaces!
-
+        
+    return data
 df = load_data()
 
 st.sidebar.header("Filter Options")
