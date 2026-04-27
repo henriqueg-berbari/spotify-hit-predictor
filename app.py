@@ -19,20 +19,19 @@ def load_data():
     url = f'https://drive.google.com/uc?id={file_id}'
     output = 'spotify_data.csv'
     
-    # This downloads the file directly to the Streamlit server
-    gdown.download(url, output, quiet=False)
+       gdown.download(url, output, quiet=False)
     
-    # Now read it locally from the server
+    
     data = pd.read_csv(output)
     
-    # Keep your cleaning/sidebar logic exactly as it is!
+    
     if 'Unnamed: 0' in data.columns:
         data = data.drop(columns=['Unnamed: 0'])
     return data
 
-# Call it
+
 df = load_data()
-# Start the Sidebar
+
 st.sidebar.header("Filter Options")
 year_list = ["All"] + sorted(df['year'].unique().tolist())
 selected_year = st.sidebar.selectbox("Select Year", year_list)
