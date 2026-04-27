@@ -21,7 +21,7 @@ def load_data():
     
     
     data = pd.read_csv(output)
-    
+    data = data.sample(300000, random_state=42) 
    
 data['year'] = data['year'].astype('int16')
 data['popularity'] = data['popularity'].astype('int8')
@@ -31,7 +31,6 @@ data[float_cols] = data[float_cols].astype('float32')
 
 if 'Unnamed: 0' in data.columns:
     data = data.drop(columns=['Unnamed: 0'])
-    
 return data # This must be pushed 4 spaces in!
 
 
