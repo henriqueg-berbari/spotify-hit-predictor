@@ -10,8 +10,6 @@ st.set_page_config(page_title="Spotify Analysis", layout="wide")
 
 import os
 
-import gdown
-
 @st.cache_data
 def load_data():
     file_id = '1E6nG9xZJ2_R2IOs8b2ip2YOaLJGuGQmS'
@@ -19,7 +17,7 @@ def load_data():
     url = f'https://drive.google.com/uc?id={file_id}'
     output = 'spotify_data.csv'
     
-       gdown.download(url, output, quiet=False)
+    gdown.download(url, output, quiet=False)
     
     
     data = pd.read_csv(output)
