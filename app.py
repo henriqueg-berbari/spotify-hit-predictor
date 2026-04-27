@@ -11,33 +11,35 @@ import os
 
 @st.cache_data
 def load_data():
-    # 1. This is the direct download link for your Google Drive file
-    # Replace 'YOUR_FILE_ID' with the ID from your share link
-    file_id = '1E6nG9xZJ2_R2IOs8b2ip2YOaL JGuGQmS'
+    # I removed the space that was between the 'L' and the 'J'
+    file_id = '1E6nG9xZJ2_R2IOs8b2ip2YOaLJGuGQmS' 
+    
+    # This is the EXACT format Pandas needs for Google Drive
     url = f'https://drive.google.com/uc?export=download&id={file_id}'
     
     cols = ['popularity', 'year', 'genre', 'danceability', 'energy', 
             'loudness', 'speechiness', 'acousticness', 'tempo', 'duration_ms']
     
-# Load the data WITHOUT restricting columns first
+    # Load the data - no 'usecols' here to avoid the previous ValueError
     data = pd.read_csv(url)
     
-    # Then only keep the columns that actually exist to prevent crashing
+    # Filter for the columns we want that actually exist
     existing_cols = [c for c in cols if c in data.columns]
     data = data[existing_cols]
     
-    # 3. Clean and optimize
+    # Cleaning
     if 'Unnamed: 0' in data.columns:
         data = data.drop(columns=['Unnamed: 0'])
     
-    data['year'] = data['year'].astype('int16')
-    data['popularity'] = data['popularity'].astype('int8')
-    
+    if 'year' in data.columns:
+        data['year'] = data['year'].astype('int16')
+    if 'popularity' in data.columns:
+        data['popularity'] = data['popularity'].astype('int8')
+        
     return data
 
-# Call the function exactly once
+# Call it
 df = load_data()
-
 # Start the Sidebar
 st.sidebar.header("Filter Options")
 year_list = ["All"] + sorted(df['year'].unique().tolist())
