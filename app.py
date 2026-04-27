@@ -32,7 +32,7 @@ data[float_cols] = data[float_cols].astype('float32')
 if 'Unnamed: 0' in data.columns:
         data = data.drop(columns=['Unnamed: 0'])
         
-    return data
+return data
 
 
 df = load_data()
