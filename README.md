@@ -1,7 +1,6 @@
 # 🎵 Spotify Hit Predictor: A Data Science Journey
 
-[![Streamlit App](https://static.streamlit.io/badges/streamlit
-
+[![Streamlit App](https://static.streamlit.io/badges/streamlit_badge_svg)](https://spotify-hit-predictor-g7krvylpaaqzh3dnlyuqsp.streamlit.app/)
 📖 The Story Behind the Data
 My journey into data science began with a simple goal: to make storytelling with data both accessible and compelling. Over the past few months, I have been honing my skills in Python—mastering the manipulation of Pandas and NumPy, and now of visualization libraries like Plotly, MatplotLib and Seaborn.
 
