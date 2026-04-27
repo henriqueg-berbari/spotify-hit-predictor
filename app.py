@@ -3,39 +3,31 @@ import pandas as pd
 import plotly.express as px
 import matplotlib.pyplot as plt
 import seaborn as sns
+import gdown
 
 
 st.set_page_config(page_title="Spotify Analysis", layout="wide")
 
 import os
 
+import gdown
+
 @st.cache_data
 def load_data():
-    # I removed the space that was between the 'L' and the 'J'
-    file_id = '1E6nG9xZJ2_R2IOs8b2ip2YOaLJGuGQmS' 
+    file_id = '1E6nG9xZJ2_R2IOs8b2ip2YOaLJGuGQmS'
+    # This tool handles the "Too Large" warning for you!
+    url = f'https://drive.google.com/uc?id={file_id}'
+    output = 'spotify_data.csv'
     
-    # This is the EXACT format Pandas needs for Google Drive
-    url = f'https://drive.google.com/uc?export=download&id={file_id}'
+    # This downloads the file directly to the Streamlit server
+    gdown.download(url, output, quiet=False)
     
-    cols = ['popularity', 'year', 'genre', 'danceability', 'energy', 
-            'loudness', 'speechiness', 'acousticness', 'tempo', 'duration_ms']
+    # Now read it locally from the server
+    data = pd.read_csv(output)
     
-    # Load the data - no 'usecols' here to avoid the previous ValueError
-    data = pd.read_csv(url)
-    
-    # Filter for the columns we want that actually exist
-    existing_cols = [c for c in cols if c in data.columns]
-    data = data[existing_cols]
-    
-    # Cleaning
+    # Keep your cleaning/sidebar logic exactly as it is!
     if 'Unnamed: 0' in data.columns:
         data = data.drop(columns=['Unnamed: 0'])
-    
-    if 'year' in data.columns:
-        data['year'] = data['year'].astype('int16')
-    if 'popularity' in data.columns:
-        data['popularity'] = data['popularity'].astype('int8')
-        
     return data
 
 # Call it
